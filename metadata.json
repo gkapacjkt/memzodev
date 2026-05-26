@@ -1,0 +1,6 @@
+{
+  "name": "Memzo",
+  "description": "A sleek, navy-blue styled website clone for Memzo.dev, featuring custom typography, a responsive layout, and an interactive contact form.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
