@@ -46,6 +46,17 @@ export default function App() {
     }
   }, [quickNotes]);
 
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(err => {
+        console.warn("Autoplay blocked or paused:", err);
+      });
+    }
+  }, []);
+
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -74,20 +85,22 @@ export default function App() {
     <div className="min-h-screen text-white font-sans selection:bg-blue-600/30 overflow-x-hidden relative flex flex-col justify-between bg-transparent">
       
       {/* Premium Video Background Loop Container */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-[-1]">
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <video 
+          ref={videoRef}
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4"
           autoPlay 
           loop 
           muted 
           playsInline 
           className="w-full h-full hero-video opacity-100"
-          style={{ filter: "brightness(0.24) contrast(1.1)" }}
-        >
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          style={{ filter: "brightness(0.24) contrast(1.1)", objectFit: "cover" }}
+        />
         <div className="absolute inset-0 bg-slate-950/60" />
       </div>
+
+      {/* Content Wrapper overlaying on top of video backgound */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
 
       {/* Navigation Header */}
       <nav id="app_nav" className="fixed top-0 left-0 right-0 z-50 px-6 py-6 md:px-12 flex items-center justify-between bg-slate-950/65 backdrop-blur-md border-b border-white/5">
@@ -533,6 +546,7 @@ export default function App() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
