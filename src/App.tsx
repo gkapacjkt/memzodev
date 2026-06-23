@@ -94,95 +94,49 @@ export default function App() {
           muted 
           playsInline 
           className="w-full h-full hero-video opacity-100"
-          style={{ filter: "brightness(0.24) contrast(1.1)", objectFit: "cover" }}
+          style={{ filter: "brightness(0.95) contrast(1.05)", objectFit: "cover" }}
         />
-        <div className="absolute inset-0 bg-slate-950/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-slate-950/25" />
       </div>
 
       {/* Content Wrapper overlaying on top of video backgound */}
       <div className="relative z-10 w-full min-h-screen flex flex-col justify-between">
 
-      {/* Navigation Header */}
-      <nav id="app_nav" className="fixed top-0 left-0 right-0 z-50 px-6 py-6 md:px-12 flex items-center justify-between bg-slate-950/65 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
-          <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="cursor-pointer">
-            <Logo size={42} />
-          </div>
-
-          <div className="hidden md:flex items-center glass-card rounded-full px-3 py-1">
-            <button 
-              onClick={() => scrollToSection("hero")} 
-              className="px-4 py-2 text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection("products")} 
-              className="px-4 py-2 text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              Products
-            </button>
-            <button 
-              onClick={() => scrollToSection("why-memzo")} 
-              className="px-4 py-2 text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              Why Memzo
-            </button>
-            <button 
-              onClick={() => scrollToSection("contact")} 
-              className="px-4 py-2 text-sm font-semibold tracking-wide text-slate-300 hover:text-white transition-colors cursor-pointer"
-            >
-              Inquiries
-            </button>
-          </div>
-
-          <div className="hidden md:flex items-center gap-3">
-            <button 
-              onClick={() => scrollToSection("contact")} 
-              className="px-5 py-2.5 rounded-full font-semibold text-xs border border-white/15 text-slate-300 hover:text-white hover:bg-white/5 hover:border-white/30 transition-all cursor-pointer"
-            >
-              Contact Us
-            </button>
-            <button 
-              onClick={() => scrollToSection("products")} 
-              className="bg-[#ffe400] text-[#0d2235] px-6 py-2.5 rounded-full font-semibold text-xs hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-950/20 cursor-pointer flex items-center gap-1"
-            >
-              <span>Explore Products</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-
-          <div className="md:hidden flex items-center gap-2">
+      {/* Aesthetic Floating Header Navigation */}
+      <header className="fixed top-0 inset-x-0 z-50 px-6 py-6 md:px-12 pointer-events-none">
+        <div className="max-w-7xl w-full mx-auto flex items-center justify-between pointer-events-auto">
+          {/* Combined Brand & Hamburger Menu Glass Pill */}
+          <div className="flex items-center gap-1.5 bg-slate-950/40 backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full shadow-lg transition-all duration-350 hover:border-white/20">
+            <div onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="cursor-pointer">
+              <Logo size={18} />
+            </div>
+            <div className="h-4 w-px bg-white/20 mx-2" />
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="p-2.5 bg-white/5 border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="text-white hover:text-slate-300 transition-colors p-1 cursor-pointer flex items-center justify-center rounded-full"
+              aria-label="Toggle Navigation drawer"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
             </button>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile Drawer */}
+      {/* Floating Left Drawer Navigation */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -24 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
+            exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[81px] inset-x-0 bg-slate-950/95 border-b border-white/10 backdrop-blur-2xl z-40 p-6 flex flex-col gap-4 md:hidden text-left shadow-2xl"
+            className="fixed top-[88px] left-6 md:left-12 max-w-xs bg-slate-950/95 border border-white/10 backdrop-blur-2xl z-40 p-5 rounded-2xl flex flex-col gap-3 text-left shadow-2xl pointer-events-auto"
           >
-            <div className="flex flex-col gap-2">
-              <button onClick={() => scrollToSection("hero")} className="py-3 px-4 rounded-xl text-sm font-semibold text-left text-slate-300 hover:bg-white/5">Home</button>
-              <button onClick={() => scrollToSection("products")} className="py-3 px-4 rounded-xl text-sm font-semibold text-left text-slate-300 hover:bg-white/5">Products</button>
-              <button onClick={() => scrollToSection("why-memzo")} className="py-3 px-4 rounded-xl text-sm font-semibold text-left text-slate-300 hover:bg-white/5">Why Memzo</button>
-              <button onClick={() => scrollToSection("contact")} className="py-3 px-4 rounded-xl text-sm font-semibold text-left text-slate-300 hover:bg-white/5">Inquiries Database</button>
-            </div>
-            <div className="h-px bg-white/15 my-1" />
-            <div className="flex flex-col gap-2">
-              <button onClick={() => scrollToSection("contact")} className="w-full text-center bg-white/5 border border-white/15 text-slate-300 py-3.5 rounded-xl font-semibold text-xs cursor-pointer active:bg-white/10">Send Message</button>
-              <button onClick={() => scrollToSection("products")} className="w-full text-center bg-[#ffe400] text-[#0d2235] py-3.5 rounded-xl font-bold text-xs cursor-pointer shadow-lg hover:bg-yellow-400 transition-colors">Explore Products</button>
+            <div className="flex flex-col gap-1 w-48">
+              <button onClick={() => { scrollToSection("hero"); setMobileMenuOpen(false); }} className="py-2 px-3 rounded-lg text-xs font-semibold text-left text-slate-300 hover:bg-white/5 hover:text-white transition-all font-sans">Home</button>
+              <button onClick={() => { scrollToSection("products"); setMobileMenuOpen(false); }} className="py-2 px-3 rounded-lg text-xs font-semibold text-left text-slate-300 hover:bg-white/5 hover:text-white transition-all font-sans">Products</button>
+              <button onClick={() => { scrollToSection("why-memzo"); setMobileMenuOpen(false); }} className="py-2 px-3 rounded-lg text-xs font-semibold text-left text-slate-300 hover:bg-white/5 hover:text-white transition-all font-sans">Why Memzo</button>
+              <button onClick={() => { scrollToSection("contact"); setMobileMenuOpen(false); }} className="py-2 px-3 rounded-lg text-xs font-semibold text-left text-slate-300 hover:bg-white/5 hover:text-white transition-all font-sans">Inquiries Database</button>
             </div>
           </motion.div>
         )}
@@ -191,89 +145,85 @@ export default function App() {
       {/* Main Grid Wrapper */}
       <div className="w-full max-w-7xl mx-auto flex-grow px-6 md:px-12 pt-32 pb-24 flex flex-col gap-28">
         
-        {/* Main Hero Section */}
-        <section id="hero" className="flex flex-col justify-center items-center text-center min-h-[70vh] py-12 relative w-full">
-          <div className="absolute top-[20%] left-[10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-[10%] right-[10%] w-96 h-96 bg-teal-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-          {/* Hero Content Centered */}
-          <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex items-center gap-2.5 mb-6 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full"
-            >
-              <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-ping" />
-              <p className="text-[11px] uppercase tracking-widest font-bold leading-none text-blue-300 font-mono">
-                PRODUCTIVITY TOOLS FOR MODERN WORKFLOW
-              </p>
-            </motion.div>
-
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-[48px] md:text-[76px] leading-[1.05] font-semibold tracking-tight max-w-4xl text-center"
-            >
-              <span className="block text-white">Build Faster.</span>
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-teal-200">
-                Think Clearer.
-              </span>
-            </motion.h1>
-
-            <motion.p 
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl font-light text-center"
-            >
-              Memzo creates minimalist digital tools that help you capture ideas and stay productive across your workflow.
-            </motion.p>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-10 flex flex-wrap justify-center items-center gap-4"
-            >
-              <button 
-                onClick={() => scrollToSection("products")}
-                className="group flex items-center bg-[#ffe400] text-[#0d2235] hover:bg-yellow-400 transition-all rounded-full p-1 pl-6 gap-4 cursor-pointer shadow-xl shadow-yellow-950/10"
+        {/* Premium Left-aligned Hero Section */}
+        <section id="hero" className="relative min-h-[85vh] flex flex-col justify-center items-start w-full py-12 md:py-20">
+          {/* Gentle ambient light-blue backing glow to support misty mockup colors */}
+          <div className="absolute top-[15%] left-[-15%] w-[600px] h-[600px] bg-sky-400/10 rounded-full blur-[140px] pointer-events-none" />
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center relative z-10">
+            {/* Left Column: Elegant Serif Branding & Email Waitlist input */}
+            <div className="lg:col-span-7 flex flex-col justify-center items-start text-left space-y-6">
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-[48px] sm:text-[66px] md:text-[84px] leading-[1.05] font-serif font-normal tracking-tight text-white select-none max-w-xl"
+                style={{ textShadow: "0 2px 30px rgba(15, 23, 42, 0.15)" }}
               >
-                <span className="font-bold text-xs uppercase tracking-wider">Explore Products</span>
-                <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center group-hover:scale-105 transition-all">
-                  <ArrowRight className="text-[#0d2235] w-5 h-5 transition-transform group-hover:translate-x-0.5" />
-                </div>
-              </button>
+                Build faster. <br />
+                Think clearer.
+              </motion.h1>
 
-              <a
-                href="https://chromewebstore.google.com/detail/quick-and-secure-note/eelncapjcglohlgpljapldmfjgddhknj"
-                target="_blank"
-                rel="noreferrer"
-                className="px-6 py-3.5 rounded-full text-xs font-semibold hover:bg-white/5 border border-white/10 hover:border-white/25 transition-all cursor-pointer flex items-center gap-2"
+              <motion.p 
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                className="text-slate-200/90 leading-relaxed max-w-md font-sans text-sm md:text-base font-light tracking-wide"
+                style={{ textShadow: "0 1px 12px rgba(15, 23, 42, 0.2)" }}
               >
-                <span>View Chrome Extension</span>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-              </a>
-            </motion.div>
+                Memzo creates minimalist digital tools that help you capture ideas and stay productive across your workflow.
+              </motion.p>
 
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-12 pt-8 border-t border-white/5 flex items-center justify-center gap-8 text-xs text-slate-400"
-            >
-              <div>
-                <span className="block text-white text-lg font-mono font-bold">100% Minimalist</span>
-                <span>Distraction-free environments</span>
+              {/* Mini action flags */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="flex items-center gap-4 text-[11px] font-mono tracking-wider text-slate-300/80 pt-4"
+              >
+                <button 
+                  onClick={() => scrollToSection("products")} 
+                  className="hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>Explore Apps Suite</span>
+                  <ArrowRight size={12} />
+                </button>
+                <span className="text-white/20">|</span>
+                <a 
+                  href="https://chromewebstore.google.com/detail/quick-and-secure-note/eelncapjcglohlgpljapldmfjgddhknj"
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-1.5"
+                >
+                  <span>Chrome Extension</span>
+                  <ExternalLink size={11} />
+                </a>
+              </motion.div>
+
+            </div>
+
+            {/* Right Column: Floating capsules aligned exactly at bottom right of viewport/stage */}
+            <div className="lg:col-span-5 relative w-full h-48 lg:h-[450px] flex items-end justify-end self-end">
+              <div className="flex flex-col items-start lg:items-end gap-2.5 select-none pointer-events-none w-full lg:w-auto">
+                {[
+                  "100% Minimalist",
+                  "Privacy-First Suite",
+                  "Zen Productivity"
+                ].map((badgeText, index) => (
+                  <motion.div
+                    key={badgeText}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, delay: 0.4 + index * 0.15, ease: "easeOut" }}
+                    className="bg-slate-950/40 backdrop-blur-xl border border-white/10 px-5 py-2.5 rounded-full shadow-lg text-xs font-medium tracking-wide text-white/90 whitespace-nowrap self-start lg:self-auto hover:border-white/20 transition-all duration-300"
+                    style={{ backdropFilter: "blur(16px)" }}
+                  >
+                    {badgeText}
+                  </motion.div>
+                ))}
               </div>
-              <div className="w-px h-8 bg-white/10" />
-              <div>
-                <span className="block text-white text-lg font-mono font-bold">Privacy-First</span>
-                <span>Zero external trackers or ads</span>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -351,14 +301,14 @@ export default function App() {
                 <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-teal-400 bg-teal-500/10 px-3.5 py-1.5 rounded-full border border-teal-500/10">
                   Chrome Extension & Web
                 </span>
-                <span className="text-[10px] font-semibold text-[#ffe400] uppercase font-mono bg-[#ffe400]/5 px-2.5 py-1 rounded">
+                <span className="text-[10px] font-semibold text-sky-300 uppercase font-mono bg-sky-500/10 px-2.5 py-1 rounded">
                   Instant Sharing
                 </span>
               </div>
 
               <div>
                 <h3 className="text-3xl font-semibold text-white tracking-tight mb-3">SnapLink</h3>
-                <p className="text-[#ffe400] text-xs font-mono mb-2 tracking-wide font-medium">
+                <p className="text-sky-300 text-xs font-mono mb-2 tracking-wide font-medium">
                   Share the vibe, not the screenshot.
                 </p>
                 <p className="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-8">
@@ -388,14 +338,14 @@ export default function App() {
                   href="https://websnplink.memzo.dev/"
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#ffe400] hover:bg-yellow-400 text-[#0d2235] font-bold text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-lg active:scale-[0.99] cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 bg-sky-650 hover:bg-sky-600 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-lg active:scale-[0.99] cursor-pointer"
                 >
                   <span>Open SnapLink</span>
                   <ExternalLink size={14} />
                 </a>
               </div>
 
-              <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-yellow-500/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-yellow-500/10 transition-all duration-500" />
+              <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-sky-500/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-sky-500/10 transition-all duration-500" />
             </motion.div>
           </div>
         </section>
@@ -403,7 +353,7 @@ export default function App() {
         {/* Why Memzo - Core Ideology */}
         <section id="why-memzo" className="scroll-mt-24">
           <div className="max-w-2xl text-left mb-16">
-            <span className="text-xs font-bold tracking-widest text-[#ffe400] uppercase block mb-3">Core Ideology</span>
+            <span className="text-xs font-bold tracking-widest text-sky-400 uppercase block mb-3">Core Ideology</span>
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white font-heading">
               Minimal Tools. Maximum Focus.
             </h2>
@@ -447,9 +397,9 @@ export default function App() {
 
         {/* CTA Banner Card */}
         <section id="cta" className="glass-card rounded-[32px] p-10 md:p-16 border border-white/10 text-center relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-[#ffe400] to-teal-400" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-sky-300 to-teal-400" />
           <div className="absolute -top-12 -left-12 w-44 h-44 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none" />
-          <div className="absolute bottom-[-40px] right-[-40px] w-44 h-44 bg-[#ffe400]/5 rounded-full blur-[60px] pointer-events-none" />
+          <div className="absolute bottom-[-40px] right-[-40px] w-44 h-44 bg-sky-500/5 rounded-full blur-[60px] pointer-events-none" />
 
           <div className="max-w-2xl mx-auto flex flex-col items-center">
             <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-white leading-tight font-heading">
@@ -462,7 +412,7 @@ export default function App() {
             <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
               <button 
                 onClick={() => scrollToSection("products")}
-                className="bg-[#ffe400] text-[#0d2235] hover:bg-yellow-400 font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition-colors cursor-pointer"
+                className="bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider px-8 py-4 rounded-xl shadow-lg transition-colors cursor-pointer"
               >
                 Explore Products
               </button>
@@ -479,7 +429,7 @@ export default function App() {
         {/* Contact/Inquiries Section */}
         <section id="contact" className="scroll-mt-24 border-t border-white/5 pt-12">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold tracking-widest text-[#ffe400] uppercase block mb-3">Let's Connect</span>
+            <span className="text-xs font-bold tracking-widest text-sky-400 uppercase block mb-3">Let's Connect</span>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white font-heading">
               Have questions or request custom integrations?
             </h2>
@@ -507,7 +457,7 @@ export default function App() {
             </div>
 
             <div className="md:col-span-4 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-[#ffe400]">Products</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-sky-400">Products</h4>
               <ul className="space-y-2 text-xs">
                 <li>
                   <a 
