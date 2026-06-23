@@ -44,11 +44,15 @@ export default function ContactForm() {
         email: email.trim(),
         subject,
         message: message.trim(),
-        createdAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        createdAt: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
       };
       const updated = [newSubmission, ...submissions];
       setSubmissions(updated);
-      localStorage.setItem("memzo_contact_submissions", JSON.stringify(updated));
+      try {
+        localStorage.setItem("memzo_contact_submissions", JSON.stringify(updated));
+      } catch (err) {
+        console.error("LocalStorage write blocked:", err);
+      }
       
       setName("");
       setEmail("");
@@ -61,7 +65,11 @@ export default function ContactForm() {
   const handleDelete = (id: string) => {
     const updated = submissions.filter(item => item.id !== id);
     setSubmissions(updated);
-    localStorage.setItem("memzo_contact_submissions", JSON.stringify(updated));
+    try {
+      localStorage.setItem("memzo_contact_submissions", JSON.stringify(updated));
+    } catch (err) {
+      console.error("LocalStorage write blocked:", err);
+    }
   };
 
   return (

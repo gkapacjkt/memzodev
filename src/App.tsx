@@ -17,37 +17,6 @@ import {
 } from 'lucide-react';
 import Logo from './components/Logo';
 import ContactForm from './components/ContactForm';
-import { Bond } from './types';
-
-const BONDS_DATA: Record<string, Bond> = {
-  FR0100: {
-    ticker: "FR0100",
-    yieldRate: 6.72,
-    price: 101.4,
-    change: "+0.25%",
-    changePositive: true,
-    maturity: "15 Years (2039)",
-    chartPath: "M0,50 Q45,35 90,20 T180,4 T220,12 T280,2"
-  },
-  FR0097: {
-    ticker: "FR0097",
-    yieldRate: 6.38,
-    price: 99.85,
-    change: "+0.12%",
-    changePositive: true,
-    maturity: "10 Years (2034)",
-    chartPath: "M0,45 Q45,52 90,25 T180,28 T220,38 T280,10"
-  },
-  FR0098: {
-    ticker: "FR0098",
-    yieldRate: 6.65,
-    price: 102.1,
-    change: "-0.05%",
-    changePositive: false,
-    maturity: "20 Years (2044)",
-    chartPath: "M0,15 Q45,20 90,40 T180,25 T220,50 T280,45"
-  }
-};
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,21 +25,18 @@ export default function App() {
     try {
       const saved = localStorage.getItem("memzo_quick_draft_notes");
       return saved ? JSON.parse(saved) : [
-        "Research Indonesian state bonds yield premium vs USD treasuries.",
-        "Review local storage schema for Note Extension v1.2",
-        "Share quick note with dev team for feedback."
+        "Read latest webpage summaries captured with SnapLink.",
+        "Review Chrome extension local database migration.",
+        "Share SnapLink draft folder with the product team."
       ];
     } catch {
       return [
-        "Research Indonesian state bonds yield premium vs USD treasuries.",
-        "Review local storage schema for Note Extension v1.2",
-        "Share quick note with dev team for feedback."
+        "Read latest webpage summaries captured with SnapLink.",
+        "Review Chrome extension local database migration.",
+        "Share SnapLink draft folder with the product team."
       ];
     }
   });
-
-  const [selectedBond, setSelectedBond] = useState<Bond>(BONDS_DATA.FR0100);
-  const [investmentAmount, setInvestmentAmount] = useState(50); // In Millions Rp
 
   useEffect(() => {
     try {
@@ -104,9 +70,6 @@ export default function App() {
     setQuickNotes(quickNotes.filter((_, i) => i !== idx));
   };
 
-  // Yield Calculator helper
-  const annualReturnRp = investmentAmount * 1000000 * (selectedBond.yieldRate / 100);
-
   return (
     <div className="min-h-screen text-white font-sans selection:bg-blue-600/30 overflow-x-hidden relative flex flex-col justify-between bg-transparent">
       
@@ -117,12 +80,10 @@ export default function App() {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover opacity-100"
+          className="w-full h-full hero-video opacity-100"
           style={{ filter: "brightness(0.24) contrast(1.1)" }}
         >
-          <source src="/p360.mp4" type="video/mp4" />
-          <source src="https://delicate-unit-e7ae.irwandi.workers.dev/" type="video/mp4" />
-          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064209_0cb7d815-ff61-4caa-a6d5-bbff145ab272.mp4" type="video/mp4" />
+          <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-slate-950/60" />
@@ -218,17 +179,20 @@ export default function App() {
       <div className="w-full max-w-7xl mx-auto flex-grow px-6 md:px-12 pt-32 pb-24 flex flex-col gap-28">
         
         {/* Main Hero Section */}
-        <section id="hero" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[75vh]">
-          {/* Hero Left Content */}
-          <div className="lg:col-span-7 text-left flex flex-col justify-center">
+        <section id="hero" className="flex flex-col justify-center items-center text-center min-h-[70vh] py-12 relative w-full">
+          <div className="absolute top-[20%] left-[10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-[10%] right-[10%] w-96 h-96 bg-teal-500/10 rounded-full blur-[120px] pointer-events-none" />
+
+          {/* Hero Content Centered */}
+          <div className="max-w-4xl mx-auto flex flex-col justify-center items-center">
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex items-center gap-2.5 mb-6 self-start bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full"
+              className="flex items-center gap-2.5 mb-6 bg-blue-500/10 border border-blue-500/20 px-4 py-1.5 rounded-full"
             >
               <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-ping" />
-              <p className="text-[11px] uppercase tracking-widest font-bold leading-none text-blue-300">
+              <p className="text-[11px] uppercase tracking-widest font-bold leading-none text-blue-300 font-mono">
                 PRODUCTIVITY TOOLS FOR MODERN WORKFLOW
               </p>
             </motion.div>
@@ -237,7 +201,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-[48px] md:text-[76px] leading-[1.05] font-semibold tracking-tight max-w-3xl"
+              className="text-[48px] md:text-[76px] leading-[1.05] font-semibold tracking-tight max-w-4xl text-center"
             >
               <span className="block text-white">Build Faster.</span>
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-teal-200">
@@ -249,16 +213,16 @@ export default function App() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-xl font-light"
+              className="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl font-light text-center"
             >
-              Memzo creates minimalist digital tools that help you capture ideas, track investments, and stay productive across your workflow.
+              Memzo creates minimalist digital tools that help you capture ideas and stay productive across your workflow.
             </motion.p>
 
             <motion.div 
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="mt-10 flex flex-wrap items-center gap-4"
+              className="mt-10 flex flex-wrap justify-center items-center gap-4"
             >
               <button 
                 onClick={() => scrollToSection("products")}
@@ -285,7 +249,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-12 pt-8 border-t border-white/5 flex items-center gap-8 text-xs text-slate-400"
+              className="mt-12 pt-8 border-t border-white/5 flex items-center justify-center gap-8 text-xs text-slate-400"
             >
               <div>
                 <span className="block text-white text-lg font-mono font-bold">100% Minimalist</span>
@@ -295,182 +259,6 @@ export default function App() {
               <div>
                 <span className="block text-white text-lg font-mono font-bold">Privacy-First</span>
                 <span>Zero external trackers or ads</span>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Hero Right Widget Column */}
-          <div className="lg:col-span-5 flex flex-col gap-6 relative">
-            <div className="absolute top-[20%] left-[-10%] w-72 h-72 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-[10%] right-[-10%] w-72 h-72 bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
-            
-            {/* Note Quick Draft Card */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="glass-card rounded-2xl border border-white/10 p-5 relative overflow-hidden shadow-2xl"
-            >
-              <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/5 text-xs text-slate-400">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-400/20 border border-red-400/40" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400/20 border border-yellow-400/40" />
-                  <div className="w-3 h-3 rounded-full bg-green-400/20 border border-green-400/40" />
-                  <span className="font-mono text-[10px] text-slate-500 ml-1">quick-note.crx</span>
-                </div>
-                <span className="font-mono text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded border border-blue-500/10 flex items-center gap-1">
-                  <ShieldCheck size={10} /> Local Storage
-                </span>
-              </div>
-
-              <form onSubmit={handleAddNote} className="space-y-3">
-                <div className="relative">
-                  <textarea
-                    value={quickNoteInput}
-                    onChange={(e) => setQuickNoteInput(e.target.value)}
-                    placeholder="Type a quick note and save..."
-                    className="w-full text-xs bg-black/30 border border-white/10 hover:border-white/20 focus:border-blue-500/50 rounded-xl p-3 pr-4 placeholder-white/20 focus:outline-none transition-all resize-none font-sans text-white h-20"
-                  />
-                  <div className="absolute bottom-2.5 right-3 text-[9px] text-slate-500 font-mono">
-                    {quickNoteInput.length} chars
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-slate-400 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    Encrypted count: {quickNotes.length}
-                  </span>
-                  <button
-                    type="submit"
-                    className="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-[11px] px-3 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
-                  >
-                    <span>Save Note</span>
-                    <Plus size={12} />
-                  </button>
-                </div>
-              </form>
-
-              <div className="mt-4 space-y-2 max-h-24 overflow-y-auto pt-2 border-t border-white/5">
-                <AnimatePresence initial={false}>
-                  {quickNotes.map((note, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 10 }}
-                      className="p-2 bg-white/5 rounded-lg border border-white/5 text-[11px] text-slate-300 flex items-start justify-between group/note gap-2"
-                    >
-                      <p className="line-clamp-2 leading-relaxed text-left">{note}</p>
-                      <button 
-                        onClick={() => handleDeleteNote(index)}
-                        className="text-slate-450 hover:text-red-400 transition-colors hover:bg-red-500/10 p-1 rounded cursor-pointer"
-                        title="Delete note"
-                      >
-                        <Trash2 size={10} />
-                      </button>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* PortoTracker Bond Yield Calculator Widget */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="glass-card rounded-2xl border border-white/10 p-5 shadow-2xl relative"
-            >
-              <div className="flex items-center justify-between mb-3 text-xs">
-                <div className="flex items-center gap-2">
-                  <Coins className="text-[#ffe400] w-4 h-4" />
-                  <span className="font-semibold text-white">PortoTracker Indonesia State Bonds</span>
-                </div>
-                <span className="text-[10px] text-teal-400 border border-teal-500/20 bg-teal-500/5 px-2 py-0.5 rounded-full font-mono">
-                  Yield Engine
-                </span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 mb-4">
-                {Object.values(BONDS_DATA).map((bond) => (
-                  <button
-                    key={bond.ticker}
-                    onClick={() => setSelectedBond(bond)}
-                    className={`p-2 rounded-xl text-left border ${
-                      selectedBond.ticker === bond.ticker
-                        ? "bg-blue-500/10 border-blue-500/40 text-white"
-                        : "bg-black/20 border-white/5 hover:border-white/10 text-slate-400 hover:text-slate-200"
-                    } transition-all cursor-pointer`}
-                  >
-                    <span className="block text-xs font-bold leading-none">{bond.ticker}</span>
-                    <span className="text-[10px] text-slate-505 block mt-1">{bond.yieldRate}% Yield</span>
-                  </button>
-                ))}
-              </div>
-
-              <div className="bg-black/30 border border-white/5 rounded-xl p-3 mb-3">
-                <div className="flex items-center justify-between text-[11px] mb-2 text-slate-400">
-                  <span>Investment Amount</span>
-                  <span className="text-white font-mono font-bold">Rp {investmentAmount} Million</span>
-                </div>
-                <input
-                  type="range"
-                  min="5"
-                  max="500"
-                  step="5"
-                  value={investmentAmount}
-                  onChange={(e) => setInvestmentAmount(Number(e.target.value))}
-                  className="w-full accent-blue-500 bg-white/15 h-1.5 rounded-lg appearance-none cursor-pointer"
-                />
-
-                <div className="grid grid-cols-2 gap-3 mt-3 pt-3 border-t border-white/5 text-left">
-                  <div>
-                    <span className="text-[9px] uppercase tracking-wider text-slate-500 block leading-none">
-                      Annual Return
-                    </span>
-                    <span className="text-xs font-bold text-green-400 font-mono mt-0.5 block">
-                      Rp {annualReturnRp.toLocaleString("id-ID")}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[9px] uppercase tracking-wider text-slate-500 block leading-none">
-                      Maturity Length
-                    </span>
-                    <span className="text-xs font-bold text-white font-mono mt-0.5 block">
-                      {selectedBond.maturity}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sparkline curve visualizer */}
-              <div className="relative h-11 w-full bg-blue-950/20 border border-white/5 rounded-lg overflow-hidden flex items-end">
-                <svg className="w-full h-8" viewBox="0 0 280 60" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="chartGlow" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.3"/>
-                      <stop offset="100%" stopColor="#3b82f6" stopOpacity="0"/>
-                    </linearGradient>
-                  </defs>
-                  {/* Gradient fill area */}
-                  <path 
-                    d={`${selectedBond.chartPath} L280,60 L0,60 Z`} 
-                    fill="url(#chartGlow)"
-                    className="transition-all duration-500"
-                  />
-                  {/* Line path */}
-                  <path 
-                    d={selectedBond.chartPath} 
-                    fill="none" 
-                    stroke="#3b82f6" 
-                    strokeWidth="1.5"
-                    className="transition-all duration-500"
-                  />
-                </svg>
-                <div className="absolute top-1 right-2 text-[9px] text-slate-500 font-mono">
-                  Live Price {selectedBond.price} Ind.
-                </div>
               </div>
             </motion.div>
           </div>
@@ -540,7 +328,7 @@ export default function App() {
               <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-blue-500/10 rounded-full blur-[60px] pointer-events-none group-hover:bg-blue-550/20 transition-all duration-500" />
             </motion.div>
 
-            {/* PortoTracker Product */}
+            {/* SnapLink Product */}
             <motion.div 
               whileHover={{ y: -5 }}
               transition={{ duration: 0.2 }}
@@ -548,30 +336,33 @@ export default function App() {
             >
               <div className="flex items-center justify-between mb-8">
                 <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-teal-400 bg-teal-500/10 px-3.5 py-1.5 rounded-full border border-teal-500/10">
-                  Bond Portfolio Tracker
+                  Chrome Extension & Web
                 </span>
                 <span className="text-[10px] font-semibold text-[#ffe400] uppercase font-mono bg-[#ffe400]/5 px-2.5 py-1 rounded">
-                  Live Dashboard
+                  Instant Sharing
                 </span>
               </div>
 
               <div>
-                <h3 className="text-3xl font-semibold text-white tracking-tight mb-3">PortoTracker</h3>
+                <h3 className="text-3xl font-semibold text-white tracking-tight mb-3">SnapLink</h3>
+                <p className="text-[#ffe400] text-xs font-mono mb-2 tracking-wide font-medium">
+                  Share the vibe, not the screenshot.
+                </p>
                 <p className="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-8">
-                  Track Indonesian government bonds and monitor your investment portfolio with a clean and modern dashboard experience.
+                  With SnapLink, capture any AI conversation, webpage, or research result — directly from your Chrome extension — and get an instant, beautiful, shareable link.
                 </p>
 
                 <div className="space-y-3 mb-10">
                   {[
-                    "Bond portfolio tracking database",
-                    "Clean analytics and yield calculator",
-                    "Rupiah price monitoring indexes",
-                    "Maturity year visualizations",
-                    "Investor-focused minimalist UI"
+                    "Share the vibe, not flat screenshots",
+                    "Capture AI conversations & research results",
+                    "Direct browser-to-link extension engine",
+                    "Fast load times and beautiful layouts",
+                    "Privacy-first, zero analytics bloat"
                   ].map((feature, i) => (
                     <div key={i} className="flex items-center gap-3 text-slate-300 text-xs">
                       <div className="p-1 rounded-full bg-teal-400/10 text-teal-400 border border-teal-400/20">
-                        <TrendingUp size={10} />
+                        <Sparkles size={10} />
                       </div>
                       <span className="font-medium">{feature}</span>
                     </div>
@@ -581,12 +372,12 @@ export default function App() {
 
               <div>
                 <a
-                  href="https://portotrack.memzo.dev/"
+                  href="https://websnplink.memzo.dev/"
                   target="_blank"
                   rel="noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#ffe400] hover:bg-yellow-400 text-[#0d2235] font-bold text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-lg active:scale-[0.99] cursor-pointer"
                 >
-                  <span>Open PortoTracker</span>
+                  <span>Open SnapLink</span>
                   <ExternalLink size={14} />
                 </a>
               </div>
@@ -652,7 +443,7 @@ export default function App() {
               Designed for modern digital workflows.
             </h2>
             <p className="mt-4 text-slate-300 font-light text-sm md:text-base leading-relaxed max-w-lg">
-              Simple tools that help you move faster every day. Capture ideas quickly or keep track of your active yield investments.
+              Simple tools that help you move faster every day. Capture ideas quickly or share beautifully designed live web snaps in an instant.
             </p>
             
             <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
@@ -695,10 +486,10 @@ export default function App() {
             <div className="md:col-span-8 space-y-4">
               <Logo size={42} />
               <p className="text-xs text-slate-400 max-w-lg leading-relaxed font-light">
-                Memzo designs beautiful, minimal tools to enhance daily digital workflows, investment analysis, and clean local storage privacy models.
+                Memzo designs beautiful, minimal tools to enhance daily digital workflows, instant web sharing layouts, and clean local storage privacy models.
               </p>
               <div className="text-[10px] font-mono text-slate-500">
-                Current State Date: {new Date().toLocaleDateString([], { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                Current State Date: {new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
             </div>
 
@@ -718,12 +509,12 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://portotrack.memzo.dev/" 
+                    href="https://websnplink.memzo.dev/" 
                     target="_blank" 
                     rel="noreferrer" 
                     className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
                   >
-                    <span>PortoTracker Indonesia</span>
+                    <span>SnapLink Web</span>
                     <ExternalLink size={10} className="text-slate-600" />
                   </a>
                 </li>

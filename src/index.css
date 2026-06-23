@@ -61,3 +61,21 @@ html, body {
   border-color: #1d4ed8;
   box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.35);
 }
+
+.hero-video {
+  object-fit: cover;
+  object-position: 80% center;
+}
+
+@media (min-width: 768px) {
+  .hero-video {
+    object-position: right center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-video {
+    object-position: center center;
+  }
+}
+
