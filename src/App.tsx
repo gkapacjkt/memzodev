@@ -335,7 +335,7 @@ export default function App() {
 
               <div>
                 <a
-                  href="https://websnplink.memzo.dev/"
+                  href="https://snplink.memzo.dev/auth/login"
                   target="_blank"
                   rel="noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-sky-650 hover:bg-sky-600 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-lg active:scale-[0.99] cursor-pointer"
