@@ -13,7 +13,10 @@ import {
   Coins, 
   Menu, 
   X, 
-  ExternalLink 
+  ExternalLink,
+  Printer,
+  Camera,
+  FileText
 } from 'lucide-react';
 import Logo from './components/Logo';
 import ContactForm from './components/ContactForm';
@@ -236,7 +239,7 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Chrome Extension Product */}
             <motion.div 
               whileHover={{ y: -5 }}
@@ -346,6 +349,60 @@ export default function App() {
               </div>
 
               <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-sky-500/5 rounded-full blur-[60px] pointer-events-none group-hover:bg-sky-500/10 transition-all duration-500" />
+            </motion.div>
+
+            {/* Full Page -> PDF Product */}
+            <motion.div 
+              whileHover={{ y: -5 }}
+              transition={{ duration: 0.2 }}
+              className="glass-card rounded-[32px] p-8 md:p-10 border border-white/10 flex flex-col justify-between text-left group overflow-hidden relative"
+            >
+              <div className="flex items-center justify-between mb-8">
+                <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/10">
+                  Chrome Extension
+                </span>
+                <span className="text-[10px] font-semibold text-slate-500 uppercase font-mono bg-white/5 px-2.5 py-1 rounded">
+                  v1.0.8 — Free
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-3xl font-semibold text-white tracking-tight mb-3">Full Page {"->"} PDF</h3>
+                <p className="text-slate-300 text-sm md:text-base leading-relaxed font-light mb-8">
+                  Capture pixel-perfect full page screenshots, clean up web layouts for clutter-free printing, and export selected sections or full pages directly to pristine PDFs.
+                </p>
+
+                <div className="space-y-3 mb-10">
+                  {[
+                    "Full-page & targeted viewport snapshots",
+                    "One-click print optimization to clean clutter",
+                    "Format, print & organize select text blocks",
+                    "Direct export to high-fidelity PDF formats",
+                    "100% private local operation, no server logs"
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3 text-slate-300 text-xs">
+                      <div className="p-1 rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20">
+                        <Printer size={10} />
+                      </div>
+                      <span className="font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <a
+                  href="https://chromewebstore.google.com/detail/text-print-full-page-scre/dihjnhokfoeolpaihgokmoioginppjeg?authuser=0&hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full flex items-center justify-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider py-4 rounded-2xl transition-all shadow-lg shadow-amber-900/30 active:scale-[0.99] cursor-pointer"
+                >
+                  <span>Install Extension</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </div>
+
+              <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-amber-500/10 rounded-full blur-[60px] pointer-events-none group-hover:bg-amber-550/20 transition-all duration-500" />
             </motion.div>
           </div>
         </section>
@@ -472,12 +529,23 @@ export default function App() {
                 </li>
                 <li>
                   <a 
-                    href="https://websnplink.memzo.dev/" 
+                    href="https://snplink.memzo.dev/auth/login" 
                     target="_blank" 
                     rel="noreferrer" 
                     className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
                   >
                     <span>SnapLink Web</span>
+                    <ExternalLink size={10} className="text-slate-600" />
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://chromewebstore.google.com/detail/text-print-full-page-scre/dihjnhokfoeolpaihgokmoioginppjeg?authuser=0&hl=en" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
+                  >
+                    <span>Full Page {"->"} PDF</span>
                     <ExternalLink size={10} className="text-slate-600" />
                   </a>
                 </li>
